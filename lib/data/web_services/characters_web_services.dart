@@ -13,8 +13,8 @@ class CharactersWebServices {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
-      connectTimeout: Duration(seconds: 20,),
-      receiveTimeout: Duration(seconds: 20,),
+      connectTimeout: Duration(seconds: 60,),
+      receiveTimeout: Duration(seconds: 60,),
     );
 
     dio = Dio(options);
@@ -24,7 +24,7 @@ class CharactersWebServices {
   Future<List<dynamic>> getAllCharacters() async{
     
     try{
-  Response response = await dio.get("characters");
+  Response response = await dio.get("character");
     print(response.data.toString());
     return response.data;
   

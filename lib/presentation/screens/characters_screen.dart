@@ -26,7 +26,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
     return BlocBuilder<CharactersCubit, CharactersState>(
       builder: (context, State) {
         if (State is CharactersLoaded) {
-          allCharacters = (State).Characters;
+          allCharacters = State.Characters;
+          print("zzzzzzzzzzzzzzzzzzzzzzzz");
+          print(allCharacters.length);
           return buildLoadedLostWidgets();
         } else {
           return showLoadingIndicator();
@@ -66,9 +68,9 @@ class _CharactersScreenState extends State<CharactersScreen> {
         shrinkWrap: true,
         physics: const ClampingScrollPhysics(),
         padding: EdgeInsets.zero,
+        itemCount: allCharacters.length,
         itemBuilder: (context, index) {
-          // Todo : not done
-          return CharacterItem();
+          return CharacterItem(character: allCharacters[index],index: index,);
         });
   }
 
