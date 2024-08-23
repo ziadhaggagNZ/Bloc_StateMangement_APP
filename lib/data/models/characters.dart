@@ -1,29 +1,35 @@
-
 class Character {
   Info? info;
   List<Results>? results;
 
   Character({this.info, this.results});
 
+  // JSON constructor
   Character.fromJson(Map<String, dynamic> json) {
-    info = json['info'] != null ? new Info.fromJson(json['info']) : null;
+    info = json['info'] != null ? Info.fromJson(json['info']) : null;
     if (json['results'] != null) {
       results = <Results>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(Results.fromJson(v));
       });
     }
   }
 
+  // Convert to JSON
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.info != null) {
-      data['info'] = this.info!.toJson();
+    final Map<String, dynamic> data = {};
+    if (info != null) {
+      data['info'] = info!.toJson();
     }
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Character(info: $info, results: $results)';
   }
 }
 
@@ -31,10 +37,11 @@ class Info {
   int? count;
   int? pages;
   String? next;
-  Null? prev;
+  String? prev;
 
   Info({this.count, this.pages, this.next, this.prev});
 
+  // JSON constructor
   Info.fromJson(Map<String, dynamic> json) {
     count = json['count'];
     pages = json['pages'];
@@ -42,13 +49,19 @@ class Info {
     prev = json['prev'];
   }
 
+  // Convert to JSON
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['pages'] = this.pages;
-    data['next'] = this.next;
-    data['prev'] = this.prev;
+    final Map<String, dynamic> data = {};
+    data['count'] = count;
+    data['pages'] = pages;
+    data['next'] = next;
+    data['prev'] = prev;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Info(count: $count, pages: $pages, next: $next, prev: $prev)';
   }
 }
 
@@ -60,62 +73,68 @@ class Results {
   String? type;
   String? gender;
   Origin? origin;
-  Origin? location;
+  Location? location; // Renaming location to Location to avoid potential conflicts
   String? image;
   List<String>? episode;
   String? url;
   String? created;
 
-  Results(
-      {this.id,
-      this.name,
-      this.status,
-      this.species,
-      this.type,
-      this.gender,
-      this.origin,
-      this.location,
-      this.image,
-      this.episode,
-      this.url,
-      this.created});
+  Results({
+    this.id,
+    this.name,
+    this.status,
+    this.species,
+    this.type,
+    this.gender,
+    this.origin,
+    this.location,
+    this.image,
+    this.episode,
+    this.url,
+    this.created,
+  });
 
+  // JSON constructor
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     status = json['status'];
     species = json['species'];
-    type = json['type'];
+    type = json['type'] ?? ''; // Handle nullable field
     gender = json['gender'];
-    origin =
-        json['origin'] != null ? new Origin.fromJson(json['origin']) : null;
-    location =
-        json['location'] != null ? new Origin.fromJson(json['location']) : null;
+    origin = json['origin'] != null ? Origin.fromJson(json['origin']) : null;
+    location = json['location'] != null ? Location.fromJson(json['location']) : null;
     image = json['image'];
     episode = json['episode'].cast<String>();
     url = json['url'];
     created = json['created'];
   }
 
+  // Convert to JSON
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['status'] = this.status;
-    data['species'] = this.species;
-    data['type'] = this.type;
-    data['gender'] = this.gender;
-    if (this.origin != null) {
-      data['origin'] = this.origin!.toJson();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['status'] = status;
+    data['species'] = species;
+    data['type'] = type;
+    data['gender'] = gender;
+    if (origin != null) {
+      data['origin'] = origin!.toJson();
     }
-    if (this.location != null) {
-      data['location'] = this.location!.toJson();
+    if (location != null) {
+      data['location'] = location!.toJson();
     }
-    data['image'] = this.image;
-    data['episode'] = this.episode;
-    data['url'] = this.url;
-    data['created'] = this.created;
+    data['image'] = image;
+    data['episode'] = episode;
+    data['url'] = url;
+    data['created'] = created;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Results(id: $id, name: $name, status: $status, species: $species, type: $type, gender: $gender)';
   }
 }
 
@@ -125,57 +144,48 @@ class Origin {
 
   Origin({this.name, this.url});
 
+  // JSON constructor
   Origin.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }
 
+  // Convert to JSON
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
+    final Map<String, dynamic> data = {};
+    data['name'] = name;
+    data['url'] = url;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Origin(name: $name, url: $url)';
   }
 }
 
+class Location {
+  String? name;
+  String? url;
 
+  Location({this.name, this.url});
 
+  // JSON constructor
+  Location.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
 
+  // Convert to JSON
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['name'] = name;
+    data['url'] = url;
+    return data;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class Character {
-//    late int id;
-//    late String name;
-//    late String status;
-//    late String type;
-//    late String gender;
-//    late String image;
-
-
-//     Character.fromJson(Map<String, dynamic> json) {
-    
-//       id: json['id'];
-//       name: json['name'];
-//       status: json['status'];
-//       type: json['type'] ?? ''; // Handle null values
-//       gender: json['gender'];
-//       image: json['image'];
-    
-//   }
-
-// }
+  @override
+  String toString() {
+    return 'Location(name: $name, url: $url)';
+  }
+}
