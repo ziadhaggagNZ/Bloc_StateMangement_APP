@@ -30,5 +30,6 @@ class AppRouter {
       case CharactarDetailsScreen:
        return MaterialPageRoute(builder: (_) => CharacterDetailsScreen());
     }
+    return null;
   }
 }
