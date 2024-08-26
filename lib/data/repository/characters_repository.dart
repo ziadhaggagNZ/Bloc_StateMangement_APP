@@ -1,5 +1,5 @@
-import 'package:flutter_breaking/data/models/characters.dart';
-import 'package:flutter_breaking/data/web_services/characters_web_services.dart';
+import '../models/characters.dart';
+import '../web_services/characters_web_services.dart';
 
 class CharactersRepository {
   final CharactersWebServices charactersWebServices;

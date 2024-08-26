@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_breaking/data/models/characters.dart';
+import '../../data/models/characters.dart';
 import 'package:meta/meta.dart';
-import 'package:flutter_breaking/data/repository/characters_repository.dart';
+import '../../data/repository/characters_repository.dart';
 
 part 'characters_state.dart';
 
